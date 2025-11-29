@@ -2,15 +2,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const $ = (id) => document.getElementById(id);
   const fmt = (v) => Number(v).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
 
-  /* ------------------------------ PONTO DE EQUILÍBRIO ------------------------------ */
+  /* ---------------- PONTO DE EQUILÍBRIO ---------------- */
   $('calc_pe').addEventListener('click', () => {
     const fixed = parseFloat($('pe_fixed').value);
     const price = parseFloat($('pe_price').value);
     const variable = parseFloat($('pe_variable').value);
     const out = $('pe_result');
 
-    if (price <= variable) return out.textContent = "Erro: preço deve ser maior que o custo variável.";
-    if (fixed <= 0) return out.textContent = "Erro: custos fixos devem ser maiores que 0.";
+    if (price <= variable) return out.textContent = "Erro: o preço deve ser maior que o custo variável.";
 
     const units = fixed / (price - variable);
     const revenue = units * price;
@@ -28,19 +27,17 @@ document.addEventListener('DOMContentLoaded', () => {
     $('pe_result').innerHTML = "";
   });
 
-  /* ------------------------------ LUCRATIVIDADE ------------------------------ */
+
+  /* ---------------- LUCRATIVIDADE ---------------- */
   $('calc_lucratividade').addEventListener('click', () => {
     const revenue = parseFloat($('lucre_revenue').value);
     const profit = parseFloat($('lucre_profit').value);
     const out = $('lucre_result');
 
-    if (revenue <= 0) return out.textContent = "Erro: receita deve ser maior que 0.";
+    if (revenue <= 0) return out.textContent = "Erro: receita inválida.";
 
     const margin = (profit / revenue) * 100;
-
-    out.innerHTML = `
-      Lucratividade: <strong>${margin.toFixed(2)}%</strong>
-    `;
+    out.innerHTML = `Lucratividade: <strong>${margin.toFixed(2)}%</strong>`;
   });
 
   $('reset_lucr').addEventListener('click', () => {
@@ -49,19 +46,17 @@ document.addEventListener('DOMContentLoaded', () => {
     $('lucre_result').innerHTML = "";
   });
 
-  /* ------------------------------ RENTABILIDADE (ROI) ------------------------------ */
+
+  /* ---------------- RENTABILIDADE ---------------- */
   $('calc_rentabilidade').addEventListener('click', () => {
     const profit = parseFloat($('rent_profit').value);
     const invest = parseFloat($('rent_invest').value);
     const out = $('rent_result');
 
-    if (invest <= 0) return out.textContent = "Erro: investimento deve ser maior que 0.";
+    if (invest <= 0) return out.textContent = "Erro: investimento inválido.";
 
     const roi = (profit / invest) * 100;
-
-    out.innerHTML = `
-      Rentabilidade (ROI): <strong>${roi.toFixed(2)}%</strong>
-    `;
+    out.innerHTML = `Rentabilidade (ROI): <strong>${roi.toFixed(2)}%</strong>`;
   });
 
   $('reset_rent').addEventListener('click', () => {
@@ -70,30 +65,61 @@ document.addEventListener('DOMContentLoaded', () => {
     $('rent_result').innerHTML = "";
   });
 
-  /* ------------------------------ MARKUP ------------------------------ */
-  $('calc_markup').addEventListener('click', () => {
-    const cost = parseFloat($('mk_cost').value);
-    const price = parseFloat($('mk_price').value);
-    const mkPct = parseFloat($('mk_percent').value);
-    const out = $('mk_result');
 
-    if (!isNaN(cost) && !isNaN(price) && cost > 0) {
-      const mk = ((price - cost) / cost) * 100;
-      return out.innerHTML = `Markup: <strong>${mk.toFixed(2)}%</strong>`;
-    }
+  /* ---------------- MARKUP MULTIPLICADOR ---------------- */
+  $('calc_mk_mult').addEventListener('click', () => {
+    const dv = parseFloat($('mk_mult_dv').value) || 0;
+    const cf = parseFloat($('mk_mult_cf').value) || 0;
+    const df = parseFloat($('mk_mult_df').value) || 0;
+    const ml = parseFloat($('mk_mult_ml').value) || 0;
+    const imp = parseFloat($('mk_mult_imp').value) || 0;
 
-    if (!isNaN(cost) && !isNaN(mkPct) && cost > 0) {
-      const newPrice = cost * (1 + mkPct / 100);
-      return out.innerHTML = `Preço sugerido: <strong>R$ ${fmt(newPrice)}</strong>`;
-    }
+    const out = $('mk_mult_result');
 
-    out.textContent = "Erro: informe Custo + Preço ou Custo + Markup.";
+    const soma = dv + cf + df + ml + imp;
+
+    if (soma >= 100) return out.textContent = "Erro: soma dos percentuais não pode ser ≥ 100%.";
+
+    const multiplicador = 100 / (100 - soma);
+
+    out.innerHTML = `Markup Multiplicador: <strong>${multiplicador.toFixed(3)}</strong>`;
   });
 
-  $('reset_mk').addEventListener('click', () => {
-    $('mk_cost').value = "";
-    $('mk_price').value = "";
-    $('mk_percent').value = "";
-    $('mk_result').innerHTML = "";
+  $('reset_mk_mult').addEventListener('click', () => {
+    $('mk_mult_dv').value = "";
+    $('mk_mult_cf').value = "";
+    $('mk_mult_df').value = "";
+    $('mk_mult_ml').value = "";
+    $('mk_mult_imp').value = "";
+    $('mk_mult_result').innerHTML = "";
   });
+
+
+  /* ---------------- MARKUP DIVISOR ---------------- */
+  $('calc_mk_div').addEventListener('click', () => {
+    const dv = parseFloat($('mk_div_dv').value) || 0;
+    const cf = parseFloat($('mk_div_cf').value) || 0;
+    const df = parseFloat($('mk_div_df').value) || 0;
+    const ml = parseFloat($('mk_div_ml').value) || 0;
+    const imp = parseFloat($('mk_div_imp').value) || 0;
+
+    const out = $('mk_div_result');
+
+    const soma = dv + cf + df + ml + imp;
+    const divisor = 1 - (soma / 100);
+
+    if (divisor <= 0) return out.textContent = "Erro: divisor inválido (resultado ≤ 0).";
+
+    out.innerHTML = `Markup Divisor: <strong>${divisor.toFixed(3)}</strong>`;
+  });
+
+  $('reset_mk_div').addEventListener('click', () => {
+    $('mk_div_dv').value = "";
+    $('mk_div_cf').value = "";
+    $('mk_div_df').value = "";
+    $('mk_div_ml').value = "";
+    $('mk_div_imp').value = "";
+    $('mk_div_result').innerHTML = "";
+  });
+
 });

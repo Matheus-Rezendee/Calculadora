@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Calculadora Financeira</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
@@ -16,12 +16,10 @@
     <main>
       <section class="cards">
 
-        <!-- Ponto de Equilíbrio -->
+        <!-- PONTO DE EQUILÍBRIO -->
         <article class="card">
           <h2>Ponto de Equilíbrio</h2>
-          <p class="explain">
-            PE = Custos Fixos / (Preço – Custo Variável)
-          </p>
+          <p class="explain">PE = Custos Fixos / (Preço – Custo Variável)</p>
 
           <div class="inputs">
             <label>Custos Fixos (R$)
@@ -45,12 +43,10 @@
           <div class="result" id="pe_result"></div>
         </article>
 
-        <!-- Lucratividade -->
+        <!-- LUCRATIVIDADE -->
         <article class="card">
           <h2>Lucratividade</h2>
-          <p class="explain">
-            Lucratividade (%) = (Lucro / Receita) × 100
-          </p>
+          <p class="explain">Lucratividade (%) = (Lucro / Receita) × 100</p>
 
           <div class="inputs">
             <label>Receita (R$)
@@ -70,12 +66,10 @@
           <div class="result" id="lucre_result"></div>
         </article>
 
-        <!-- Rentabilidade -->
+        <!-- RENTABILIDADE -->
         <article class="card">
           <h2>Rentabilidade (ROI)</h2>
-          <p class="explain">
-            ROI (%) = (Lucro / Investimento) × 100
-          </p>
+          <p class="explain">ROI (%) = (Lucro / Investimento) × 100</p>
 
           <div class="inputs">
             <label>Lucro Líquido (R$)
@@ -95,37 +89,79 @@
           <div class="result" id="rent_result"></div>
         </article>
 
-        <!-- Markup -->
+
+        <!-- MARKUP MULTIPLICADOR -->
         <article class="card">
-          <h2>Markup</h2>
-          <p class="explain">
-            Markup (%) = ((Preço – Custo) / Custo) × 100
-          </p>
+          <h2>Markup Multiplicador</h2>
+          <p class="explain">Multiplicador = 100 ÷ (100 – Soma dos Percentuais)</p>
 
           <div class="inputs">
-            <label>Custo (R$)
-              <input id="mk_cost" type="number" step="0.01" placeholder="ex: 30">
+            <label>Despesas Variáveis (DV %)
+              <input id="mk_mult_dv" type="number" step="0.01" placeholder="ex: 3">
             </label>
 
-            <label>Preço (R$)
-              <input id="mk_price" type="number" step="0.01" placeholder="ex: 50">
+            <label>Custos Fixos (CF %)
+              <input id="mk_mult_cf" type="number" step="0.01" placeholder="ex: 13">
             </label>
 
-            <label>Markup desejado (%)
-              <input id="mk_percent" type="number" step="0.01" placeholder="ex: 40">
+            <label>Despesas Fixas (DF %)
+              <input id="mk_mult_df" type="number" step="0.01" placeholder="ex: 7">
+            </label>
+
+            <label>Margem de Lucro (ML %)
+              <input id="mk_mult_ml" type="number" step="0.01" placeholder="ex: 15">
+            </label>
+
+            <label>Impostos (%)
+              <input id="mk_mult_imp" type="number" step="0.01" placeholder="ex: 22">
             </label>
           </div>
 
           <div class="actions">
-            <button id="calc_markup">Calcular</button>
-            <button id="reset_mk" class="ghost">Limpar</button>
+            <button id="calc_mk_mult">Calcular</button>
+            <button id="reset_mk_mult" class="ghost">Limpar</button>
           </div>
 
-          <div class="result" id="mk_result"></div>
+          <div class="result" id="mk_mult_result"></div>
+        </article>
+
+
+        <!-- MARKUP DIVISOR -->
+        <article class="card">
+          <h2>Markup Divisor</h2>
+          <p class="explain">Divisor = 1 – (Soma dos Percentuais / 100)</p>
+
+          <div class="inputs">
+            <label>Despesas Variáveis (DV %)
+              <input id="mk_div_dv" type="number" step="0.01" placeholder="ex: 3">
+            </label>
+
+            <label>Custos Fixos (CF %)
+              <input id="mk_div_cf" type="number" step="0.01" placeholder="ex: 13">
+            </label>
+
+            <label>Despesas Fixas (DF %)
+              <input id="mk_div_df" type="number" step="0.01" placeholder="ex: 7">
+            </label>
+
+            <label>Margem de Lucro (ML %)
+              <input id="mk_div_ml" type="number" step="0.01" placeholder="ex: 15">
+            </label>
+
+            <label>Impostos (%)
+              <input id="mk_div_imp" type="number" step="0.01" placeholder="ex: 22">
+            </label>
+          </div>
+
+          <div class="actions">
+            <button id="calc_mk_div">Calcular</button>
+            <button id="reset_mk_div" class="ghost">Limpar</button>
+          </div>
+
+          <div class="result" id="mk_div_result"></div>
         </article>
 
       </section>
-
     </main>
 
     <footer>
