@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Calculadora Financeira</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Calculadora Financeira</h1>
+      <p class="subtitle">Ponto de Equilíbrio · Rentabilidade · Lucratividade · Markup</p>
+    </header>
+
+    <main>
+      <section class="cards">
+
+        <!-- Ponto de Equilíbrio -->
+        <article class="card">
+          <h2>Ponto de Equilíbrio</h2>
+          <p class="explain">
+            PE = Custos Fixos / (Preço – Custo Variável)
+          </p>
+
+          <div class="inputs">
+            <label>Custos Fixos (R$)
+              <input id="pe_fixed" type="number" step="0.01" placeholder="ex: 2500">
+            </label>
+
+            <label>Preço por unidade (R$)
+              <input id="pe_price" type="number" step="0.01" placeholder="ex: 50">
+            </label>
+
+            <label>Custo Variável (R$)
+              <input id="pe_variable" type="number" step="0.01" placeholder="ex: 30">
+            </label>
+          </div>
+
+          <div class="actions">
+            <button id="calc_pe">Calcular</button>
+            <button id="reset_pe" class="ghost">Limpar</button>
+          </div>
+
+          <div class="result" id="pe_result"></div>
+        </article>
+
+        <!-- Lucratividade -->
+        <article class="card">
+          <h2>Lucratividade</h2>
+          <p class="explain">
+            Lucratividade (%) = (Lucro / Receita) × 100
+          </p>
+
+          <div class="inputs">
+            <label>Receita (R$)
+              <input id="lucre_revenue" type="number" step="0.01" placeholder="ex: 10000">
+            </label>
+
+            <label>Lucro Líquido (R$)
+              <input id="lucre_profit" type="number" step="0.01" placeholder="ex: 2500">
+            </label>
+          </div>
+
+          <div class="actions">
+            <button id="calc_lucratividade">Calcular</button>
+            <button id="reset_lucr" class="ghost">Limpar</button>
+          </div>
+
+          <div class="result" id="lucre_result"></div>
+        </article>
+
+        <!-- Rentabilidade -->
+        <article class="card">
+          <h2>Rentabilidade (ROI)</h2>
+          <p class="explain">
+            ROI (%) = (Lucro / Investimento) × 100
+          </p>
+
+          <div class="inputs">
+            <label>Lucro Líquido (R$)
+              <input id="rent_profit" type="number" step="0.01" placeholder="ex: 2500">
+            </label>
+
+            <label>Capital Investido (R$)
+              <input id="rent_invest" type="number" step="0.01" placeholder="ex: 20000">
+            </label>
+          </div>
+
+          <div class="actions">
+            <button id="calc_rentabilidade">Calcular</button>
+            <button id="reset_rent" class="ghost">Limpar</button>
+          </div>
+
+          <div class="result" id="rent_result"></div>
+        </article>
+
+        <!-- Markup -->
+        <article class="card">
+          <h2>Markup</h2>
+          <p class="explain">
+            Markup (%) = ((Preço – Custo) / Custo) × 100
+          </p>
+
+          <div class="inputs">
+            <label>Custo (R$)
+              <input id="mk_cost" type="number" step="0.01" placeholder="ex: 30">
+            </label>
+
+            <label>Preço (R$)
+              <input id="mk_price" type="number" step="0.01" placeholder="ex: 50">
+            </label>
+
+            <label>Markup desejado (%)
+              <input id="mk_percent" type="number" step="0.01" placeholder="ex: 40">
+            </label>
+          </div>
+
+          <div class="actions">
+            <button id="calc_markup">Calcular</button>
+            <button id="reset_mk" class="ghost">Limpar</button>
+          </div>
+
+          <div class="result" id="mk_result"></div>
+        </article>
+
+      </section>
+
+    </main>
+
+    <footer>
+      <small>Desenvolvido por Matheus Rezende</small>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
